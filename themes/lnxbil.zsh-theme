@@ -39,7 +39,7 @@ RPROMPT="%{$fg[white]%}[%{$fg[cyan]%}%D %*%{$fg[white]%}]%{$reset_color%}"
 
 # Format for git_prompt_info
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git:("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 
 # Format for git_prompt_status()
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%}ⓐ  "
@@ -54,8 +54,8 @@ ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[red]%}[%{$fg[magenta]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[red]%}]%{$reset_color%}"
 
 # Format for parse_git_dirty()
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}Ⓓ  "
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}Ⓞ  "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}✖%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✔%{$reset_color%}"
 
 
 # SVN Forwarding on GIT-Status
