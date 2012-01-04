@@ -70,6 +70,15 @@ else
     local svn_status=''
 fi
 
+# Load and show the BATTERY prompt if plugin present
+if _plugin_present "battery"
+then
+    local battery_status='$(battery_pct_prompt) with $(battery_time_remaining)'
+else
+    local battery_status=''
+fi
+
+
 # Get the return status of the last command
 local ret_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%?%{$reset_color%}"
 
@@ -79,7 +88,7 @@ local p="%{$fg[red]%}»%{$reset_color%}"
 PROMPT="\
 ${user_host} ${rvm_ruby} ${git_branch}${svn_branch}
 ${current_dir} [$ret_status] ${git_status}${svn_status} %B${p}%b "
-RPROMPT="%{$fg[white]%}[%{$fg[cyan]%}%D %*%{$fg[white]%}]%{$reset_color%}"
+RPROMPT="${battery_status} %{$fg[white]%}[%{$fg[cyan]%}%D %*%{$fg[white]%}]%{$reset_color%}"
 
 # Format for git_prompt_info
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git:("
