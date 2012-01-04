@@ -33,7 +33,19 @@ local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 # Load and show the RVM prompt if plugin present
 if _plugin_present "rvm"
 then
-    local rvm_ruby='%{$fg[red]%}‹${$(rvm_prompt_info)//[()]/}›%{$reset_color%}'
+    # This only shows the RVM prompt if rvm-prompt return something useful
+    # and not an empty string
+    function show_rvm_prompt
+    {
+        rvm_ruby_prompt=$(rvm-prompt i v g)
+        if [ "$rvm_ruby_prompt" != "" ]
+        then
+            echo "%{$fg[red]%}‹${rvm_ruby_prompt}›%{$reset_color%}"
+        else
+            echo ''
+        fi
+    }
+    local rvm_ruby='$(show_rvm_prompt)'
 else
     local rvm_ruby=''
 fi
