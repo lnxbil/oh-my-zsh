@@ -13,6 +13,16 @@
 #                   - maran
 ###############################################################################
 
+function _plugin_present
+{
+    for plugin ($plugins); do
+        if [ $plugin = $1 ]
+        then
+            return 0
+        fi
+    done
+    return 1
+}
 
 # user information (green for normal user, red for system user)
 local user_host='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$reset_color%}'
@@ -20,16 +30,38 @@ local user_host='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$reset_color%}
 # current directory ($HOME abbreviated as ~)
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 
-local rvm_ruby='%{$fg[red]%}‹$(rvm-prompt i v g)›%{$reset_color%}'
+# Load and show the RVM prompt if plugin present
+if _plugin_present "rvm"
+then
+    local rvm_ruby='%{$fg[red]%}‹${$(rvm_prompt_info)//[()]/}›%{$reset_color%}'
+else
+    local rvm_ruby=''
+fi
 
-local git_branch='$(git_prompt_info)$(git_prompt_short_sha)%{$reset_color%}'
-local git_status='$(git_prompt_status)%{$reset_color%}'
+# Load and show the GIT prompt if plugin present
+if _plugin_present "git"
+then
+    local git_branch='$(git_prompt_info)$(git_prompt_short_sha)%{$reset_color%}'
+    local git_status='$(git_prompt_status)%{$reset_color%}'
+else
+    local git_branch=''
+    local git_status=''
+fi
 
-local svn_branch='$(svn_prompt_info)%{$reset_color%}'
-local svn_status='$(svn_prompt_status)%{$reset_color%}'
+# Load and show the SVN prompt if plugin present
+if _plugin_present "svn"
+then
+    local svn_branch='$(svn_prompt_info)%{$reset_color%}'
+    local svn_status='$(svn_prompt_status)%{$reset_color%}'
+else
+    local svn_branch=''
+    local svn_status=''
+fi
 
+# Get the return status of the last command
 local ret_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%?%{$reset_color%}"
 
+# The prompt character
 local p="%{$fg[red]%}»%{$reset_color%}"
 
 PROMPT="\
