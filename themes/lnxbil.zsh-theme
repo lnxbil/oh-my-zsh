@@ -18,7 +18,7 @@
 local user_host='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$reset_color%}'
 
 # current directory ($HOME abbreviated as ~)
-local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
+local current_dir='%{$terminfo[bold]$fg[cyan]%}%~%{$reset_color%}'
 
 local rvm_ruby='%{$fg[red]%}‹$(rvm-prompt i v g)›%{$reset_color%}'
 
