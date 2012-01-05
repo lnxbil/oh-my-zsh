@@ -28,7 +28,7 @@ function _plugin_present
 local user_host='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$reset_color%}'
 
 # current directory ($HOME abbreviated as ~)
-local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
+local current_dir='%{$terminfo[bold]$fg[cyan]%}%~%{$reset_color%}'
 
 # Load and show the RVM prompt if plugin present
 if _plugin_present "rvm"
