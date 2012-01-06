@@ -37,7 +37,7 @@ then
     # and not an empty string
     function show_rvm_prompt
     {
-        rvm_ruby_prompt=$(rvm-prompt i v g)
+        rvm_ruby_prompt=$(rvm-prompt i v g 2>/dev/null)
         if [ "$rvm_ruby_prompt" != "" ]
         then
             echo "%{$fg[red]%}‹${rvm_ruby_prompt}›%{$reset_color%}"
