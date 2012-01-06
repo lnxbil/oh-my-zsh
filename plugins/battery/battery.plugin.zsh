@@ -25,8 +25,8 @@ function battery_present_prompt_common
     }
 }
 
-case `uname -s` in
-    Linux)
+case $OSTYPE in
+    linux*)
         if [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]] ; then
             function battery_pct_remaining() { echo "$(acpi | cut -f2 -d ',' | tr -cd '[:digit:]')" }
             function battery_time_remaining() { echo $(acpi | cut -f3 -d ',') }
@@ -35,7 +35,7 @@ case `uname -s` in
             battery_set_no_battery_present_prompt
         fi
         ;;
-    Darwin)
+    darwin*)
         if [ $(pmset -g batt | grep -c InternalBatt) -gt 0 ]; then
             # using pmset for this, maybe there is a more intelligent way, but this works
             function battery_pct_remaining() { echo "${$(LANG=C pmset -g batt | grep InternalBattery | cut -d'%' -f 1)##*[\!0-9]}"}
