@@ -3,7 +3,6 @@
 bindkey -e
 bindkey '\ew' kill-region
 bindkey -s '\el' "ls\n"
-bindkey -s '\e.' "..\n"
 bindkey '^r' history-incremental-search-backward
 bindkey "^[[5~" up-line-or-history
 bindkey "^[[6~" down-line-or-history
@@ -30,6 +29,11 @@ bindkey '^?' backward-delete-char
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
 
 # consider emacs keybindings:
 
